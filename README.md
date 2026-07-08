@@ -1,39 +1,60 @@
-# Nano ID
+# `react-dom`
 
-<img src="https://ai.github.io/nanoid/logo.svg" align="right"
-     alt="Nano ID logo by Anton Lovchikov" width="180" height="94">
+This package serves as the entry point to the DOM and server renderers for React. It is intended to be paired with the generic React package, which is shipped as `react` to npm.
 
-**English** | [Русский](./README.ru.md) | [简体中文](./README.zh-CN.md) | [Bahasa Indonesia](./README.id-ID.md)
+## Installation
 
-A tiny, secure, URL-friendly, unique string ID generator for JavaScript.
-
-> “An amazing level of senseless perfectionism,
-> which is simply impossible not to respect.”
-
-* **Small.** 130 bytes (minified and gzipped). No dependencies.
-  [Size Limit] controls the size.
-* **Fast.** It is 2 times faster than UUID.
-* **Safe.** It uses hardware random generator. Can be used in clusters.
-* **Short IDs.** It uses a larger alphabet than UUID (`A-Za-z0-9_-`).
-  So ID size was reduced from 36 to 21 symbols.
-* **Portable.** Nano ID was ported
-  to [20 programming languages](#other-programming-languages).
-
-```js
-import { nanoid } from 'nanoid'
-model.id = nanoid() //=> "V1StGXR8_Z5jdHi6B-myT"
+```sh
+npm install react react-dom
 ```
 
-Supports modern browsers, IE [with Babel], Node.js and React Native.
+## Usage
 
-[online tool]: https://gitpod.io/#https://github.com/ai/nanoid/
-[with Babel]:  https://developer.epages.com/blog/coding/how-to-transpile-node-modules-with-babel-and-webpack-in-a-monorepo/
-[Size Limit]:  https://github.com/ai/size-limit
+### In the browser
 
-<a href="https://evilmartians.com/?utm_source=nanoid">
-  <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
-       alt="Sponsored by Evil Martians" width="236" height="54">
-</a>
+```js
+import { createRoot } from 'react-dom/client';
 
-## Docs
-Read full docs **[here](https://github.com/ai/nanoid#readme)**.
+function App() {
+  return <div>Hello World</div>;
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+```
+
+### On the server
+
+```js
+import { renderToPipeableStream } from 'react-dom/server';
+
+function App() {
+  return <div>Hello World</div>;
+}
+
+function handleRequest(res) {
+  // ... in your server handler ...
+  const stream = renderToPipeableStream(<App />, {
+    onShellReady() {
+      res.statusCode = 200;
+      res.setHeader('Content-type', 'text/html');
+      stream.pipe(res);
+    },
+    // ...
+  });
+}
+```
+
+## API
+
+### `react-dom`
+
+See https://react.dev/reference/react-dom
+
+### `react-dom/client`
+
+See https://react.dev/reference/react-dom/client
+
+### `react-dom/server`
+
+See https://react.dev/reference/react-dom/server
