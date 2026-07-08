@@ -1,6 +1,13 @@
+--
+
+# 📜 LICENSE File (`LICENSE`)
+
+Save this text in a file named `LICENSE` in the root folder of your repository:
+
+```text
 MIT License
 
-Copyright (c) 2024 Madeline Gurriarán
+Copyright (c) 2026 Your Name / Pulse Social
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
